@@ -19,11 +19,10 @@ public class SpringBootDemo implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
-        registry.addRedirectViewController("/", "/readingList");
     }
 
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new ReaderHandlerMethodArgumentResolver());
-    }
+//    @Override
+//    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+//        resolvers.add(new ReaderHandlerMethodArgumentResolver());
+//    }
 }

@@ -1,5 +1,5 @@
-INSERT INTO Reader (USERNAME, PASSWORD, FULLNAME) VALUES ('craig', 'password', 'Craig Walls');
-INSERT INTO Reader (USERNAME, PASSWORD, FULLNAME) VALUES ('walt', 'marceline', 'Walt Disney');
+INSERT INTO Reader (USERNAME, PASSWORD, FULLNAME) VALUES ('craig', '{noop}password', 'Craig Walls');
+INSERT INTO Reader (USERNAME, PASSWORD, FULLNAME) VALUES ('walt', '{noop}marceline', 'Walt Disney');
 
 INSERT INTO BOOK (READER_USERNAME, ISBN, TITLE, AUTHOR, DESCRIPTION) VALUES (
     'craig', '9781472154668', 'Where the Crawdads Sing', 'Delia Owens',

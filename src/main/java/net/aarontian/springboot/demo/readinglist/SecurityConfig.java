@@ -6,8 +6,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -38,10 +39,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(username -> {
-            UserDetails userDetails = readerRepository.getOne(username);
-            if (userDetails != null)
-                return userDetails;
+            Optional<Reader> readers = readerRepository.findById(username);
+            if (readers.isPresent())
+                return readers.get();
             throw new UsernameNotFoundException("User '" + username + "' not found.");
         });
     }
+/*
+    @EventListener(ApplicationReadyEvent.class)
+    public void addUsersAfterStartUp() {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        Reader reader = new Reader();
+        reader.setUsername("craig");
+        reader.setFullname("Craig Walls");
+        reader.setPassword(encoder.encode("password"));
+        readerRepository.save(reader);
+        reader.setUsername("walt");
+        reader.setFullname("Walt Disney");
+        reader.setPassword(encoder.encode("marceline"));
+        readerRepository.save(reader);
+    }
+ */
 }
